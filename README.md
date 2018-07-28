@@ -4,8 +4,6 @@ Place in between `td` tags to add resizing functionality. Works with touch and m
 
 Currently only supports resizing between columns. 
 
-Flaws: You have to put filler `<td/>`'s in rows you don't use the resizer, and the resizer needs to be wide enough to actually grab.
-
 ### Props
 
 `number minWidth` - The minimum width for the columns (in pixels)
@@ -49,3 +47,7 @@ Flaws: You have to put filler `<td/>`'s in rows you don't use the resizer, and t
     </tbody>
 </table>
 ```
+
+### Flaws
+- You have to put filler `<td/>`'s in rows you don't use the resizer
+- The resizer needs to be wide enough to actually grab. To do this while maintaining a thin bar, set the background color to `transparent` and assign a value to `border-left`
