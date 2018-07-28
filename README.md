@@ -1,5 +1,7 @@
 ## React Column Resizer
 
+Demo: https://codesandbox.io/s/wyqm25jmk
+
 Place in between `td` tags to add resizing functionality. Works with touch and mouse events. 
 
 Currently only supports resizing between columns. 
