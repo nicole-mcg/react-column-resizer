@@ -40,8 +40,6 @@ export default class ColumnResizer extends React.Component {
             return;
         }
 
-        
-        console.log(this.mousePos)
         var ele = this.refs.ele;
 
         var diff = this.startPos - this.mousePos;
@@ -87,7 +85,8 @@ export default class ColumnResizer extends React.Component {
     render() {
 
         var style = {
-            cursor: 'ew-resize'
+            cursor: 'ew-resize',
+            userSelect: "none"
         };
 
         if (this.props.className === "") {
@@ -110,12 +109,6 @@ export default class ColumnResizer extends React.Component {
         );
     }
 
-}
-
-
-ColumnResizer.propTypes = {
-    minWidth: React.PropTypes.number,
-    className: React.PropTypes.string
 }
 
 ColumnResizer.defaultProps = {

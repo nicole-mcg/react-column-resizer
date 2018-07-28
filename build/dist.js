@@ -69,7 +69,6 @@ var ColumnResizer = function (_React$Component) {
                 return;
             }
 
-            console.log(this.mousePos);
             var ele = this.refs.ele;
 
             var diff = this.startPos - this.mousePos;
@@ -120,7 +119,8 @@ var ColumnResizer = function (_React$Component) {
         value: function render() {
 
             var style = {
-                cursor: 'ew-resize'
+                cursor: 'ew-resize',
+                userSelect: "none"
             };
 
             if (this.props.className === "") {
@@ -147,11 +147,6 @@ var ColumnResizer = function (_React$Component) {
 
 exports.default = ColumnResizer;
 
-
-ColumnResizer.propTypes = {
-    minWidth: _react2.default.PropTypes.number,
-    className: _react2.default.PropTypes.string
-};
 
 ColumnResizer.defaultProps = {
     minWidth: 50,
