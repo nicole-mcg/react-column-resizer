@@ -14,6 +14,10 @@ Flaws: You have to put filler `<td/>`'s in rows you don't use the resizer, and t
 
 ### Usage: 
 
+`import ColumnResizer from 'react-column-resizer`
+
+...
+
 ```
 <table>
     <tbody>
