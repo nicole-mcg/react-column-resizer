@@ -4,7 +4,7 @@ Place in between `td` tags to add resizing functionality. Works with touch and m
 
 Currently only supports resizing between columns. 
 
-Flaws: The resizer needs to be wide enough to grab and you have to put filler `<td/>`'s in rows you don't use the resizer.
+Flaws: You have to put filler `<td/>`'s in rows you don't use the resizer, and the resizer needs to be wide enough to actually grab.
 
 ### Props
 
