@@ -1,0 +1,27 @@
+{
+  "name": "react-column-resizer",
+  "version": "1.0.0",
+  "description": "Place in between `td` tags to add resizing functionality. Works with touch and mouse events. \nCurrently only supports resizing between columns. \nFlaws: The resizer needs to be wide enough to grab and you have to put filler `<td/>`'s in rows you don't use the resizer.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c-mcg/react-column-resizer.git"
+  },
+  "keywords": [
+    "react",
+    "html",
+    "table",
+    "column",
+    "auto",
+    "resize"
+  ],
+  "author": "Connor McGrogan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/c-mcg/react-column-resizer/issues"
+  },
+  "homepage": "https://github.com/c-mcg/react-column-resizer#readme"
+}
