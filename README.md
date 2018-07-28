@@ -4,8 +4,6 @@ Place in between `td` tags to add resizing functionality. Works with touch and m
 
 Currently only supports resizing between columns. 
 
-Flaws: The resizer needs to be wide enough to grab and you have to put filler `<td/>`'s in rows you don't use the resizer.
-
 ### Props
 
 `number minWidth` - The minimum width for the columns (in pixels)
@@ -13,6 +11,10 @@ Flaws: The resizer needs to be wide enough to grab and you have to put filler `<
 `string className`- Any classes you want to add (inline style will be disabled if this is set)
 
 ### Usage: 
+
+`import ColumnResizer from 'react-column-resizer`
+
+...
 
 ```
 <table>
@@ -45,3 +47,7 @@ Flaws: The resizer needs to be wide enough to grab and you have to put filler `<
     </tbody>
 </table>
 ```
+
+### Flaws
+- You have to put filler `<td/>`'s in rows you don't use the resizer
+- The resizer needs to be wide enough to actually grab. To do this while maintaining a thin bar, set the background color to `transparent` and assign a value to `border-left`
