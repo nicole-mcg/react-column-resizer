@@ -6,6 +6,8 @@ Place in between `td` tags to add resizing functionality. Works with touch and m
 
 Currently only supports resizing between columns. 
 
+`npm install react-column-resizer`
+
 ### Props
 
 `number minWidth` - The minimum width for the columns (in pixels)
