@@ -9,6 +9,7 @@ Flaws: The resizer needs to be wide enough to grab and you have to put filler `<
 ### Props
 
 `number minWidth` - The minimum width for the columns (in pixels)
+
 `string className`- Any classes you want to add (inline style will be disabled if this is set)
 
 ### Usage: 
