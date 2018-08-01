@@ -10,6 +10,10 @@ export default class ColumnResizer extends React.Component {
             hovered: false
         }
 
+        if (props.disabled) {
+            return;
+        }
+
         this.dragging = false;
 
         this.onMouseMoveBound = null;
@@ -23,6 +27,10 @@ export default class ColumnResizer extends React.Component {
     }
 
     startDrag(e) {
+        if (this.props.disabled) {
+            return;
+        }
+
         this.dragging = true;
 
         this.startPos = this.mousePos;
@@ -31,10 +39,18 @@ export default class ColumnResizer extends React.Component {
     }
 
     endDrag(e) {
+        if (this.props.disabled) {
+            return;
+        }
+
         this.dragging = false;
     }
 
     onMouseMove(e) {
+        if (this.props.disabled) {
+            return;
+        }
+
         this.mousePos = e.touches ? e.touches[0].screenX : e.screenX;
         if (!this.dragging) {
             return;
@@ -56,18 +72,30 @@ export default class ColumnResizer extends React.Component {
     }
 
     onMouseOver() {
+        if (this.props.disabled) {
+            return;
+        }
+
         this.setState({
             hovered: true
         })
     }
 
     onMouseOut() {
+        if (this.props.disabled) {
+            return;
+        }
+
         this.setState({
             hovered: false
         })
     }
 
     componentDidMount() {
+        if (this.props.disabled) {
+            return;
+        }
+
         this.onMouseMoveBound = this.onMouseMove.bind(this);
         document.addEventListener('mousemove', this.onMouseMoveBound);
         document.addEventListener("touchmove", this.onMouseMoveBound, false);
@@ -78,6 +106,10 @@ export default class ColumnResizer extends React.Component {
     }
 
     componentWillUnmount() {
+        if (this.props.disabled) {
+            return;
+        }
+
         document.removeEventListener('mousemove', this.onMouseMoveBound);
         document.removeEventListener('mouseup', this.endDragBound);
     }
@@ -85,9 +117,12 @@ export default class ColumnResizer extends React.Component {
     render() {
 
         var style = {
-            cursor: 'ew-resize',
             userSelect: "none"
         };
+
+        if (!this.props.disabled) {
+            style['cursor'] = 'ew-resize';
+        }
 
         if (this.props.className === "") {
             style.width = '6px';
@@ -112,6 +147,7 @@ export default class ColumnResizer extends React.Component {
 }
 
 ColumnResizer.defaultProps = {
+    disabled: false,
     minWidth: 50,
     className: ""
 }
