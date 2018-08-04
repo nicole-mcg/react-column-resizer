@@ -34,6 +34,10 @@ var ColumnResizer = function (_React$Component) {
             hovered: false
         };
 
+        if (props.disabled) {
+            return _possibleConstructorReturn(_this);
+        }
+
         _this.dragging = false;
 
         _this.onMouseMoveBound = null;
@@ -50,6 +54,10 @@ var ColumnResizer = function (_React$Component) {
     _createClass(ColumnResizer, [{
         key: 'startDrag',
         value: function startDrag(e) {
+            if (this.props.disabled) {
+                return;
+            }
+
             this.dragging = true;
 
             this.startPos = this.mousePos;
@@ -59,11 +67,19 @@ var ColumnResizer = function (_React$Component) {
     }, {
         key: 'endDrag',
         value: function endDrag(e) {
+            if (this.props.disabled) {
+                return;
+            }
+
             this.dragging = false;
         }
     }, {
         key: 'onMouseMove',
         value: function onMouseMove(e) {
+            if (this.props.disabled) {
+                return;
+            }
+
             this.mousePos = e.touches ? e.touches[0].screenX : e.screenX;
             if (!this.dragging) {
                 return;
@@ -86,6 +102,10 @@ var ColumnResizer = function (_React$Component) {
     }, {
         key: 'onMouseOver',
         value: function onMouseOver() {
+            if (this.props.disabled) {
+                return;
+            }
+
             this.setState({
                 hovered: true
             });
@@ -93,6 +113,10 @@ var ColumnResizer = function (_React$Component) {
     }, {
         key: 'onMouseOut',
         value: function onMouseOut() {
+            if (this.props.disabled) {
+                return;
+            }
+
             this.setState({
                 hovered: false
             });
@@ -100,6 +124,10 @@ var ColumnResizer = function (_React$Component) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
+            if (this.props.disabled) {
+                return;
+            }
+
             this.onMouseMoveBound = this.onMouseMove.bind(this);
             document.addEventListener('mousemove', this.onMouseMoveBound);
             document.addEventListener("touchmove", this.onMouseMoveBound, false);
@@ -111,6 +139,10 @@ var ColumnResizer = function (_React$Component) {
     }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
+            if (this.props.disabled) {
+                return;
+            }
+
             document.removeEventListener('mousemove', this.onMouseMoveBound);
             document.removeEventListener('mouseup', this.endDragBound);
         }
@@ -119,9 +151,12 @@ var ColumnResizer = function (_React$Component) {
         value: function render() {
 
             var style = {
-                cursor: 'ew-resize',
                 userSelect: "none"
             };
+
+            if (!this.props.disabled) {
+                style['cursor'] = 'ew-resize';
+            }
 
             if (this.props.className === "") {
                 style.width = '6px';
@@ -149,6 +184,7 @@ exports.default = ColumnResizer;
 
 
 ColumnResizer.defaultProps = {
+    disabled: false,
     minWidth: 50,
     className: ""
 };
