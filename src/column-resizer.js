@@ -1,3 +1,7 @@
+
+//Author: Connor McGrogan
+//https://github.com/c-mcg/react-column-resizer
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
