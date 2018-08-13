@@ -4,7 +4,7 @@ NPM: https://www.npmjs.com/package/react-column-resizer
 
 Install: `npm install react-column-resizer`
 
-Demo: https://codesandbox.io/s/wyqm25jmk
+Demo: https://codesandbox.io/s/oo6n4zjorq
 
 Place in between `td` tags to add resizing functionality. Works with touch and mouse events. 
 
