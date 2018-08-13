@@ -18,7 +18,7 @@ Currently only supports resizing between columns.
 
 ### Usage: 
 
-`import ColumnResizer from 'react-column-resizer`
+`import ColumnResizer from 'react-column-resizer'`
 
 ...
 
@@ -39,15 +39,15 @@ Currently only supports resizing between columns.
         </tr>
         
         <tr>
-            <td>Cell (0, 0)</td>
+            <td>1</td>
             
             <td/>
             
-            <td>Cell (0, 1)</td>
+            <td>2</td>
             
             <td/>
             
-            <td>Cell(0, 2)</td>
+            <td>3</td>
         </tr>
         
     </tbody>
