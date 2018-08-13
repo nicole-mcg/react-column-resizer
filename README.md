@@ -1,6 +1,6 @@
 ## React Column Resizer
 
-NPM Link: https://www.npmjs.com/package/react-column-resizer
+NPM: https://www.npmjs.com/package/react-column-resizer
 
 Install: `npm install react-column-resizer`
 
