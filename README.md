@@ -1,7 +1,5 @@
 ## React Column Resizer [![npm version](https://badge.fury.io/js/react-column-resizer.svg)](https://badge.fury.io/js/react-column-resizer) [![Build Status](https://travis-ci.org/c-mcg/react-column-resizer.svg?branch=master)](https://travis-ci.org/c-mcg/react-column-resizer)
 
-NPM: https://www.npmjs.com/package/react-column-resizer
-
 Install: `npm install react-column-resizer`
 
 Demo: https://codesandbox.io/s/oo6n4zjorq
