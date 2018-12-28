@@ -2,3 +2,4 @@ src
 tests
 .babelrc
 .travis.yml
+jest.config.js
