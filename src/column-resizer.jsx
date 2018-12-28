@@ -10,15 +10,9 @@ export default class ColumnResizer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            hovered: false
-        }
-
         this.startDrag = this.startDrag.bind(this);
         this.endDrag = this.endDrag.bind(this);
         this.onMouseMove = this.onMouseMove.bind(this);
-        this.onMouseOver = this.onMouseOver.bind(this);
-        this.onMouseOut = this.onMouseOut.bind(this);
 
         if (props.disabled) {
             return;
@@ -33,19 +27,32 @@ export default class ColumnResizer extends React.Component {
         this.startWidthNext = 0;
     }
 
-    startDrag(e) {
+    startDrag() {
         if (this.props.disabled) {
             return;
         }
 
         this.dragging = true;
+        this.startPos = this.mouseX;
 
-        this.startPos = this.mousePos;
-        this.startWidthNext = this.refs.ele.nextSibling.clientWidth;
-        this.startWidthPrev = this.refs.ele.previousSibling.clientWidth;
+        this.startWidthPrev = 0;
+        this.startWidthNext = 0;        
+
+        if (this.refs.ele) {
+            let prevSibling = this.refs.ele.previousSibling;
+            let nextSibling = this.refs.ele.nextSibling;
+
+            if (prevSibling) {
+                this.startWidthPrev = prevSibling.clientWidth;
+            }
+    
+            if (nextSibling) {
+                this.startWidthNext = nextSibling.clientWidth;            
+            }
+        }
     }
 
-    endDrag(e) {
+    endDrag() {
         if (this.props.disabled) {
             return;
         }
@@ -58,44 +65,29 @@ export default class ColumnResizer extends React.Component {
             return;
         }
 
-        this.mousePos = e.touches ? e.touches[0].screenX : e.screenX;
+        this.mouseX = e.touches ? e.touches[0].screenX : e.screenX;
         if (!this.dragging) {
             return;
         }
 
-        var ele = this.refs.ele;
+        const ele = this.refs.ele;
 
-        var diff = this.startPos - this.mousePos;
+        const moveDiff = this.startPos - this.mouseX;
+        let newPrev = this.startWidthPrev - moveDiff;
+        let newNext = this.startWidthNext + moveDiff;
 
-        var newPrev = this.startWidthPrev - diff;
-        var newNext = this.startWidthNext + diff;
-
-        if (newPrev < this.props.minWidth || newNext < this.props.minWidth) {
-            return;
+        if (newPrev < this.props.minWidth) {
+            const offset = newPrev - this.props.minWidth;
+            newPrev = this.props.minWidth;
+            newNext += offset;
+        } else if (newNext < this.props.minWidth) {
+            const offset = newNext - this.props.minWidth;
+            newNext = this.props.minWidth;
+            newPrev += offset;
         }
 
         ele.previousSibling.style.width = newPrev + 'px';
         ele.nextSibling.style.width = newNext + 'px';
-    }
-
-    onMouseOver() {
-        if (this.props.disabled) {
-            return;
-        }
-
-        this.setState({
-            hovered: true
-        })
-    }
-
-    onMouseOut() {
-        if (this.props.disabled) {
-            return;
-        }
-
-        this.setState({
-            hovered: false
-        })
     }
 
     componentDidMount() {
@@ -104,10 +96,10 @@ export default class ColumnResizer extends React.Component {
         }
 
         document.addEventListener('mousemove', this.onMouseMove);
-        document.addEventListener("touchmove", this.onMouseMove, false);
-
         document.addEventListener('mouseup', this.endDrag);
-        document.addEventListener("touchend", this.endDrag, false);
+
+        document.addEventListener("touchmove", this.onMouseMove);
+        document.addEventListener("touchend", this.endDrag);
     }
 
     componentWillUnmount() {
@@ -117,6 +109,9 @@ export default class ColumnResizer extends React.Component {
 
         document.removeEventListener('mousemove', this.onMouseMove);
         document.removeEventListener('mouseup', this.endDrag);
+
+        document.removeEventListener('touchmove', this.onMouseMove);
+        document.removeEventListener('touchend', this.endDrag);
     }
 
     render() {
@@ -126,26 +121,20 @@ export default class ColumnResizer extends React.Component {
         };
 
         if (!this.props.disabled) {
-            style['cursor'] = 'ew-resize';
+            style.cursor = 'ew-resize';
         }
 
         if (this.props.className === "") {
             style.width = '6px';
             style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
-
-            if (this.state.hovered) {
-                style.backgroundColor = 'background-color: rgba(0, 0, 0, 0.25)';
-            }
         }
 
         return (
             <td ref="ele" 
                 style={style}
                 className={this.props.className}
-                onMouseDown={this.startDrag}
-                onMouseOver={this.onMouseOver} 
-                onMouseOut={this.onMouseOut}
-                onTouchStart={this.startDrag}/>
+                onMouseDown={!this.props.disabled && this.startDrag}
+                onTouchStart={!this.props.disabled && this.startDrag}/>
         );
     }
 
