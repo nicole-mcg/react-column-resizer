@@ -40,14 +40,9 @@ function (_React$Component) {
     _classCallCheck(this, ColumnResizer);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ColumnResizer).call(this, props));
-    _this.state = {
-      hovered: false
-    };
     _this.startDrag = _this.startDrag.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.endDrag = _this.endDrag.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onMouseMove = _this.onMouseMove.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.onMouseOver = _this.onMouseOver.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.onMouseOut = _this.onMouseOut.bind(_assertThisInitialized(_assertThisInitialized(_this)));
 
     if (props.disabled) {
       return _possibleConstructorReturn(_this);
@@ -63,19 +58,32 @@ function (_React$Component) {
 
   _createClass(ColumnResizer, [{
     key: "startDrag",
-    value: function startDrag(e) {
+    value: function startDrag() {
       if (this.props.disabled) {
         return;
       }
 
       this.dragging = true;
-      this.startPos = this.mousePos;
-      this.startWidthNext = this.refs.ele.nextSibling.clientWidth;
-      this.startWidthPrev = this.refs.ele.previousSibling.clientWidth;
+      this.startPos = this.mouseX;
+      this.startWidthPrev = 0;
+      this.startWidthNext = 0;
+
+      if (this.refs.ele) {
+        var prevSibling = this.refs.ele.previousSibling;
+        var nextSibling = this.refs.ele.nextSibling;
+
+        if (prevSibling) {
+          this.startWidthPrev = prevSibling.clientWidth;
+        }
+
+        if (nextSibling) {
+          this.startWidthNext = nextSibling.clientWidth;
+        }
+      }
     }
   }, {
     key: "endDrag",
-    value: function endDrag(e) {
+    value: function endDrag() {
       if (this.props.disabled) {
         return;
       }
@@ -89,45 +97,30 @@ function (_React$Component) {
         return;
       }
 
-      this.mousePos = e.touches ? e.touches[0].screenX : e.screenX;
+      this.mouseX = e.touches ? e.touches[0].screenX : e.screenX;
 
       if (!this.dragging) {
         return;
       }
 
       var ele = this.refs.ele;
-      var diff = this.startPos - this.mousePos;
-      var newPrev = this.startWidthPrev - diff;
-      var newNext = this.startWidthNext + diff;
+      var moveDiff = this.startPos - this.mouseX;
+      var newPrev = this.startWidthPrev - moveDiff;
+      var newNext = this.startWidthNext + moveDiff;
 
-      if (newPrev < this.props.minWidth || newNext < this.props.minWidth) {
-        return;
+      if (newPrev < this.props.minWidth) {
+        var offset = newPrev - this.props.minWidth;
+        newPrev = this.props.minWidth;
+        newNext += offset;
+      } else if (newNext < this.props.minWidth) {
+        var _offset = newNext - this.props.minWidth;
+
+        newNext = this.props.minWidth;
+        newPrev += _offset;
       }
 
       ele.previousSibling.style.width = newPrev + 'px';
       ele.nextSibling.style.width = newNext + 'px';
-    }
-  }, {
-    key: "onMouseOver",
-    value: function onMouseOver() {
-      if (this.props.disabled) {
-        return;
-      }
-
-      this.setState({
-        hovered: true
-      });
-    }
-  }, {
-    key: "onMouseOut",
-    value: function onMouseOut() {
-      if (this.props.disabled) {
-        return;
-      }
-
-      this.setState({
-        hovered: false
-      });
     }
   }, {
     key: "componentDidMount",
@@ -137,9 +130,9 @@ function (_React$Component) {
       }
 
       document.addEventListener('mousemove', this.onMouseMove);
-      document.addEventListener("touchmove", this.onMouseMove, false);
       document.addEventListener('mouseup', this.endDrag);
-      document.addEventListener("touchend", this.endDrag, false);
+      document.addEventListener("touchmove", this.onMouseMove);
+      document.addEventListener("touchend", this.endDrag);
     }
   }, {
     key: "componentWillUnmount",
@@ -150,6 +143,8 @@ function (_React$Component) {
 
       document.removeEventListener('mousemove', this.onMouseMove);
       document.removeEventListener('mouseup', this.endDrag);
+      document.removeEventListener('touchmove', this.onMouseMove);
+      document.removeEventListener('touchend', this.endDrag);
     }
   }, {
     key: "render",
@@ -159,26 +154,20 @@ function (_React$Component) {
       };
 
       if (!this.props.disabled) {
-        style['cursor'] = 'ew-resize';
+        style.cursor = 'ew-resize';
       }
 
       if (this.props.className === "") {
         style.width = '6px';
         style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
-
-        if (this.state.hovered) {
-          style.backgroundColor = 'background-color: rgba(0, 0, 0, 0.25)';
-        }
       }
 
       return _react.default.createElement("td", {
         ref: "ele",
         style: style,
         className: this.props.className,
-        onMouseDown: this.startDrag,
-        onMouseOver: this.onMouseOver,
-        onMouseOut: this.onMouseOut,
-        onTouchStart: this.startDrag
+        onMouseDown: !this.props.disabled && this.startDrag,
+        onTouchStart: !this.props.disabled && this.startDrag
       });
     }
   }]);

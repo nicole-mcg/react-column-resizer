@@ -3,4 +3,4 @@
 //https://github.com/c-mcg/react-column-resizer
 
 'use strict';
-module.exports = require('./build/dist.js');
+module.exports = require('./dist/dist.js');
