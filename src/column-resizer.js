@@ -6,7 +6,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class ColumnResizer extends React.Component {
-    displayName: "ColumnResizer";
+
     constructor(props) {
         super(props);
 
