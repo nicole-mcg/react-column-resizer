@@ -14,14 +14,17 @@ export default class ColumnResizer extends React.Component {
             hovered: false
         }
 
+        this.startDrag = this.startDrag.bind(this);
+        this.endDrag = this.endDrag.bind(this);
+        this.onMouseMove = this.onMouseMove.bind(this);
+        this.onMouseOver = this.onMouseOver.bind(this);
+        this.onMouseOut = this.onMouseOut.bind(this);
+
         if (props.disabled) {
             return;
         }
 
         this.dragging = false;
-
-        this.onMouseMoveBound = null;
-        this.endDragBound = null;
 
         this.mouseX = 0
 
@@ -100,13 +103,11 @@ export default class ColumnResizer extends React.Component {
             return;
         }
 
-        this.onMouseMoveBound = this.onMouseMove.bind(this);
-        document.addEventListener('mousemove', this.onMouseMoveBound);
-        document.addEventListener("touchmove", this.onMouseMoveBound, false);
+        document.addEventListener('mousemove', this.onMouseMove);
+        document.addEventListener("touchmove", this.onMouseMove, false);
 
-        this.endDragBound = this.endDrag.bind(this);
-        document.addEventListener('mouseup', this.endDragBound);
-        document.addEventListener("touchend", this.endDragBound, false);
+        document.addEventListener('mouseup', this.endDrag);
+        document.addEventListener("touchend", this.endDrag, false);
     }
 
     componentWillUnmount() {
@@ -114,8 +115,8 @@ export default class ColumnResizer extends React.Component {
             return;
         }
 
-        document.removeEventListener('mousemove', this.onMouseMoveBound);
-        document.removeEventListener('mouseup', this.endDragBound);
+        document.removeEventListener('mousemove', this.onMouseMove);
+        document.removeEventListener('mouseup', this.endDrag);
     }
 
     render() {
@@ -141,10 +142,10 @@ export default class ColumnResizer extends React.Component {
             <td ref="ele" 
                 style={style}
                 className={this.props.className}
-                onMouseDown={this.startDrag.bind(this)}
-                onMouseOver={this.onMouseOver.bind(this)} 
-                onMouseOut={this.onMouseOut.bind(this)}
-                onTouchStart={this.startDrag.bind(this)}/>
+                onMouseDown={this.startDrag}
+                onMouseOver={this.onMouseOver} 
+                onMouseOut={this.onMouseOut}
+                onTouchStart={this.startDrag}/>
         );
     }
 
