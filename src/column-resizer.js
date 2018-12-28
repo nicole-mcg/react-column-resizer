@@ -3,7 +3,7 @@
 //https://github.com/c-mcg/react-column-resizer
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import { bool, number, string } from 'prop-types';
 
 export default class ColumnResizer extends React.Component {
 
@@ -154,5 +154,11 @@ export default class ColumnResizer extends React.Component {
 ColumnResizer.defaultProps = {
     disabled: false,
     minWidth: 50,
-    className: ""
+    className: "",
+}
+
+ColumnResizer.propTypes = {
+    disabled: bool,
+    minWidth: number,
+    className: string,
 }
