@@ -1,4 +1,4 @@
-## React Column Resizer
+## React Column Resizer [![npm version](https://badge.fury.io/js/react-column-resizer.svg)](https://badge.fury.io/js/react-column-resizer) [![Build Status](https://travis-ci.org/c-mcg/react-column-resizer.svg?branch=master)](https://travis-ci.org/c-mcg/react-column-resizer)
 
 NPM: https://www.npmjs.com/package/react-column-resizer
 
