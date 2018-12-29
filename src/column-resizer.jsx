@@ -14,14 +14,8 @@ export default class ColumnResizer extends React.Component {
         this.endDrag = this.endDrag.bind(this);
         this.onMouseMove = this.onMouseMove.bind(this);
 
-        if (props.disabled) {
-            return;
-        }
-
         this.dragging = false;
-
         this.mouseX = 0
-
         this.startPos = 0;
         this.startWidthPrev = 0;
         this.startWidthNext = 0;
