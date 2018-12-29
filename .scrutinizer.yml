@@ -4,6 +4,7 @@ filter:
         
     excluded_paths:
         - dist/
+        - tests/
         
     dependency_paths:
         - node_modules/
