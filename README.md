@@ -8,7 +8,7 @@ Demo: https://codesandbox.io/s/1olmx0q4w7
 
 `npm install react-column-resizer`
 
-<sup>* Requires `react` as a peer dependency</sup>
+<sup>* Requires `react` as a peer dependency: `npm install react`</sup>
 
 
 ```
