@@ -10,11 +10,11 @@ Demo: https://codesandbox.io/s/1olmx0q4w7
 
 ### Props
 
-`bool disabled` - Set to true if you want to temporarily disable resizing
-
-`number minWidth` - The minimum width for the columns (in pixels)
-
-`string className`- Any classes you want to add (inline style will be disabled if this is set)
+| Prop Name  | Type | Description |
+| ------------- | ------------- | ------------- |
+| disabled | bool | Set to true if you want to temporarily disable resizing |
+| minWidth | number | The minimum width for the columns (in pixels) |
+| className | string | Any custom classes. If set, default `width` and `backgroundColor` styles will not be applied |
 
 ### Usage: 
 
