@@ -57,7 +57,7 @@ describe('react-column-resizer', () => {
         expect(props).not.toHaveProperty('onTouchStart', wrapper.instance().startDrag);
     });
 
-    it('registers and removes events on document', () => {
+    it.only('registers and removes events on document', () => {
         const oldRemoveEventListener = document.removeEventListener;
         const oldAddEventListener = document.addEventListener;
         document.addEventListener = jest.fn();
@@ -66,17 +66,33 @@ describe('react-column-resizer', () => {
         const wrapper = shallow(<ColumnResizer/>);
         const instance = wrapper.instance();
 
-        expect(document.addEventListener).toHaveBeenCalledWith("mousemove", instance.onMouseMove);
-        expect(document.addEventListener).toHaveBeenCalledWith("mouseup", instance.endDrag);
-        expect(document.addEventListener).toHaveBeenCalledWith("touchmove", instance.onMouseMove);
-        expect(document.addEventListener).toHaveBeenCalledWith("touchend", instance.endDrag);
+        const expectMouseEventsAdded = () => {
+            expect(document.addEventListener).toHaveBeenCalledWith("mousemove", instance.onMouseMove);
+            expect(document.addEventListener).toHaveBeenCalledWith("mouseup", instance.endDrag);
+            expect(document.addEventListener).toHaveBeenCalledWith("touchmove", instance.onMouseMove);
+            expect(document.addEventListener).toHaveBeenCalledWith("touchend", instance.endDrag);
+        };
+
+        const expectMouseEventsRemoved = () => {
+            expect(document.removeEventListener).toHaveBeenCalledWith("mousemove", instance.onMouseMove);
+            expect(document.removeEventListener).toHaveBeenCalledWith("mouseup", instance.endDrag);
+            expect(document.removeEventListener).toHaveBeenCalledWith("touchmove", instance.onMouseMove);
+            expect(document.removeEventListener).toHaveBeenCalledWith("touchend", instance.endDrag);
+        }
+
+        expectMouseEventsAdded();
+
+        wrapper.setProps({ disabled: true });
+
+        expectMouseEventsRemoved();
+
+        wrapper.setProps({ disabled: false });
+
+        expectMouseEventsAdded();
 
         wrapper.unmount();
 
-        expect(document.removeEventListener).toHaveBeenCalledWith("mousemove", instance.onMouseMove);
-        expect(document.removeEventListener).toHaveBeenCalledWith("mouseup", instance.endDrag);
-        expect(document.removeEventListener).toHaveBeenCalledWith("touchmove", instance.onMouseMove);
-        expect(document.removeEventListener).toHaveBeenCalledWith("touchend", instance.endDrag);
+        expectMouseEventsRemoved();
 
         document.addEventListener = oldAddEventListener;
         document.removeEventListener = oldRemoveEventListener;

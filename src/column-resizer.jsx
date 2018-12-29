@@ -95,11 +95,7 @@ export default class ColumnResizer extends React.Component {
             return;
         }
 
-        document.addEventListener('mousemove', this.onMouseMove);
-        document.addEventListener('mouseup', this.endDrag);
-
-        document.addEventListener("touchmove", this.onMouseMove);
-        document.addEventListener("touchend", this.endDrag);
+        this.addEventListenersToDocument();
     }
 
     componentWillUnmount() {
@@ -107,6 +103,28 @@ export default class ColumnResizer extends React.Component {
             return;
         }
 
+        this.removeEventListenersFromDocument();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.disabled && !this.props.disabled) {
+            this.addEventListenersToDocument();
+        }
+
+        if (!prevProps.disabled && this.props.disabled) {
+            this.removeEventListenersFromDocument();
+        }
+    }
+
+    addEventListenersToDocument() {
+        document.addEventListener('mousemove', this.onMouseMove);
+        document.addEventListener('mouseup', this.endDrag);
+
+        document.addEventListener("touchmove", this.onMouseMove);
+        document.addEventListener("touchend", this.endDrag);
+    }
+
+    removeEventListenersFromDocument() {
         document.removeEventListener('mousemove', this.onMouseMove);
         document.removeEventListener('mouseup', this.endDrag);
 
