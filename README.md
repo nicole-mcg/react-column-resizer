@@ -10,11 +10,11 @@ Demo: https://codesandbox.io/s/1olmx0q4w7
 
 ### Props
 
-| Prop Name  | Type | Description |
-| ------------- | ------------- | ------------- |
-| disabled | bool | Set to true if you want to disable resizing |
-| minWidth | number | The minimum width for the columns (in pixels) |
-| className | string | Any custom classes. If set, default `width` and `backgroundColor` styles will not be applied |
+| Prop Name  | Type | Default Value | Description |
+| ------------- | ------------- | ------------- | ------------- |
+| disabled | bool | `false` | Set to true if you want to disable resizing |
+| minWidth | number | `0` | The minimum width for the columns (in pixels) |
+| className | string | `""` | Any custom classes. If set, default `width` and `backgroundColor` styles will not be applied |
 
 ### Usage: 
 
