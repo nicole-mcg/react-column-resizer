@@ -6,9 +6,6 @@ filter:
         - dist/
         - tests/
         
-    dependency_paths:
-        - node_modules/
-        
 checks:
     javascript:
         no_param_assign: true
