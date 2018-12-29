@@ -2,7 +2,7 @@
 
 Place in between `td` tags to add resizing functionality. Works with touch and mouse events. 
 
-Demo: https://codesandbox.io/s/oo6n4zjorq
+Demo: https://codesandbox.io/s/1olmx0q4w7
 
 ### Setup
 
