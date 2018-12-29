@@ -154,7 +154,7 @@ export default class ColumnResizer extends React.Component {
 
 ColumnResizer.defaultProps = {
     disabled: false,
-    minWidth: 50,
+    minWidth: 0,
     className: "",
 }
 

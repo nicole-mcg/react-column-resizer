@@ -16,15 +16,20 @@ describe('react-column-resizer', () => {
 
         const wrapper = shallow(<ColumnResizer/>);
 
+        const wrapperProps = wrapper.props();
+        expect(wrapperProps.disabled).not.toBeTruthy();
+        expect(wrapperProps.minWidth).not.toBeTruthy();
+        expect(wrapperProps).toHaveProperty('className', "");
+
         const td = wrapper.find('td');
         expect(td).toHaveLength(1);
         expect(td.children()).toHaveLength(0);
 
-        const props = td.props();
-        expect(props).toHaveProperty('style', expectedStyle);
-        expect(props).toHaveProperty('className', "");
-        expect(props).toHaveProperty('onMouseDown', wrapper.instance().startDrag);
-        expect(props).toHaveProperty('onTouchStart', wrapper.instance().startDrag);
+        const tdProps = td.props();
+        expect(tdProps).toHaveProperty('style', expectedStyle);
+        expect(tdProps).toHaveProperty('className', "");
+        expect(tdProps).toHaveProperty('onMouseDown', wrapper.instance().startDrag);
+        expect(tdProps).toHaveProperty('onTouchStart', wrapper.instance().startDrag);
     });
 
     it('can accept a custom className', () => {
@@ -57,7 +62,7 @@ describe('react-column-resizer', () => {
         expect(props).not.toHaveProperty('onTouchStart', wrapper.instance().startDrag);
     });
 
-    it.only('registers and removes events on document', () => {
+    it('registers and removes events on document', () => {
         const oldRemoveEventListener = document.removeEventListener;
         const oldAddEventListener = document.addEventListener;
         document.addEventListener = jest.fn();
