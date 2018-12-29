@@ -12,7 +12,7 @@ Demo: https://codesandbox.io/s/1olmx0q4w7
 
 | Prop Name  | Type | Description |
 | ------------- | ------------- | ------------- |
-| disabled | bool | Set to true if you want to temporarily disable resizing |
+| disabled | bool | Set to true if you want to disable resizing |
 | minWidth | number | The minimum width for the columns (in pixels) |
 | className | string | Any custom classes. If set, default `width` and `backgroundColor` styles will not be applied |
 
