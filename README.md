@@ -18,40 +18,32 @@ Demo: https://codesandbox.io/s/1olmx0q4w7
 
 ### Usage: 
 
-`import ColumnResizer from 'react-column-resizer'`
-
-...
-
 ```
-<table>
-    <tbody>
-    
+import React from "react";
+import { render } from "react-dom";
+import ColumnResizer from "react-column-resizer";
+
+const App = () => (
+  <div>
+    <table>
+      <tbody>
         <tr>
-            <td>Header 1</td>
-            
-            <ColumnResizer/>
-            
-            <td>Header 2</td>
-            
-            <ColumnResizer/>
-            
-            <td>Header 3</td>
+          <td>1</td>
+          <ColumnResizer className="columnResizer" minWidth={0} />
+          <td>2</td>
         </tr>
-        
+
         <tr>
-            <td>1</td>
-            
-            <td/>
-            
-            <td>2</td>
-            
-            <td/>
-            
-            <td>3</td>
+          <td>3</td>
+          <td />
+          <td>4</td>
         </tr>
-        
-    </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
+);
+
+render(<App />, document.body);
 ```
 
 ### Flaws
