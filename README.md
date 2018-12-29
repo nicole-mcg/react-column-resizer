@@ -8,6 +8,9 @@ Demo: https://codesandbox.io/s/1olmx0q4w7
 
 `npm install react-column-resizer`
 
+<sup>* Requires `react` as a peer dependency</sup>
+
+
 ```
 import React from "react";
 import { render } from "react-dom";
