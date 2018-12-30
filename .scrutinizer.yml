@@ -1,11 +1,3 @@
-filter:
-    paths:
-        - src/
-        
-    excluded_paths:
-        - dist/
-        - tests/
-        
 checks:
     javascript:
         no_param_assign: true
@@ -20,4 +12,4 @@ build:
     nodes:
         analysis:
             tests:
-                override: [js-scrutinizer-run]
+                js-scrutinizer-run
