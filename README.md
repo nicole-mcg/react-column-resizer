@@ -1,4 +1,4 @@
-## React Column Resizer [![npm version](https://badge.fury.io/js/react-column-resizer.svg)](https://badge.fury.io/js/react-column-resizer) [![Build Status](https://travis-ci.org/c-mcg/react-column-resizer.svg?branch=master)](https://travis-ci.org/c-mcg/react-column-resizer)
+## React Column Resizer [![npm version](https://badge.fury.io/js/react-column-resizer.svg)](https://badge.fury.io/js/react-column-resizer) [![Build Status](https://travis-ci.org/niknakbakpak/react-column-resizer.svg?branch=master)](https://travis-ci.org/niknakbakpak/react-column-resizer)
 
 Place in between `td` tags to add resizing functionality. Works with touch and mouse events. 
 

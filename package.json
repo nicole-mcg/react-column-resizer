@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/c-mcg/react-column-resizer.git"
+    "url": "git+https://github.com/niknakbakpak/react-column-resizer.git"
   },
   "keywords": [
     "react",
@@ -22,9 +22,9 @@
   "author": "Connor McGrogan",
   "license": "GPL-3.0-only",
   "bugs": {
-    "url": "https://github.com/c-mcg/react-column-resizer/issues"
+    "url": "https://github.com/niknakbakpak/react-column-resizer/issues"
   },
-  "homepage": "https://github.com/c-mcg/react-column-resizer#readme",
+  "homepage": "https://github.com/niknakbakpak/react-column-resizer#readme",
   "peerDependencies": {
     "react": "^16.0.0"
   },
