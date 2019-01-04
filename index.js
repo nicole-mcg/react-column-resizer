@@ -1,5 +1,5 @@
 
 //Author: Connor McGrogan
-//https://github.com/niknakbakpak/react-column-resizer
+//https://github.com/nik-m2/react-column-resizer
 
 module.exports = require('./dist/column-resizer.js');
