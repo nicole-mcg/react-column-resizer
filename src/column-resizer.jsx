@@ -1,5 +1,5 @@
 
-//Author: Connor McGrogan
+//Author: Nik M
 //https://github.com/nik-m2/react-column-resizer
 
 import React from 'react';
