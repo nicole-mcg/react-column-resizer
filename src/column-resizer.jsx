@@ -1,4 +1,3 @@
-
 //Author: Bibin Antony, Nik M
 //https://github.com/bibinantony1998/react-table-column-resizer
 
