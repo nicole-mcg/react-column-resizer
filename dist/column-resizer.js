@@ -43,16 +43,10 @@ function (_React$Component) {
     _this.startDrag = _this.startDrag.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.endDrag = _this.endDrag.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.onMouseMove = _this.onMouseMove.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-
-    if (props.disabled) {
-      return _possibleConstructorReturn(_this);
-    }
-
     _this.dragging = false;
     _this.mouseX = 0;
     _this.startPos = 0;
     _this.startWidthPrev = 0;
-    _this.startWidthNext = 0;
     return _this;
   }
 
@@ -66,18 +60,12 @@ function (_React$Component) {
       this.dragging = true;
       this.startPos = this.mouseX;
       this.startWidthPrev = 0;
-      this.startWidthNext = 0;
 
       if (this.refs.ele) {
         var prevSibling = this.refs.ele.previousSibling;
-        var nextSibling = this.refs.ele.nextSibling;
 
         if (prevSibling) {
           this.startWidthPrev = prevSibling.clientWidth;
-        }
-
-        if (nextSibling) {
-          this.startWidthNext = nextSibling.clientWidth;
         }
       }
     }
@@ -106,21 +94,12 @@ function (_React$Component) {
       var ele = this.refs.ele;
       var moveDiff = this.startPos - this.mouseX;
       var newPrev = this.startWidthPrev - moveDiff;
-      var newNext = this.startWidthNext + moveDiff;
 
-      if (newPrev < this.props.minWidth) {
-        var offset = newPrev - this.props.minWidth;
-        newPrev = this.props.minWidth;
-        newNext += offset;
-      } else if (newNext < this.props.minWidth) {
-        var _offset = newNext - this.props.minWidth;
-
-        newNext = this.props.minWidth;
-        newPrev += _offset;
+      if (!this.props.minWidth || newPrev >= this.props.minWidth) {
+        ele.previousSibling.style.width = newPrev + 'px';
+        ele.previousSibling.style.minWidth = newPrev + 'px';
+        ele.previousSibling.style.maxWidth = newPrev + 'px';
       }
-
-      ele.previousSibling.style.width = newPrev + 'px';
-      ele.nextSibling.style.width = newNext + 'px';
     }
   }, {
     key: "componentDidMount",
@@ -129,10 +108,13 @@ function (_React$Component) {
         return;
       }
 
-      document.addEventListener('mousemove', this.onMouseMove);
-      document.addEventListener('mouseup', this.endDrag);
-      document.addEventListener("touchmove", this.onMouseMove);
-      document.addEventListener("touchend", this.endDrag);
+      var ele = this.refs.ele;
+
+      if (this.props.minWidth && ele) {
+        ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
+      }
+
+      this.addEventListenersToDocument();
     }
   }, {
     key: "componentWillUnmount",
@@ -141,6 +123,30 @@ function (_React$Component) {
         return;
       }
 
+      this.removeEventListenersFromDocument();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevProps.disabled && !this.props.disabled) {
+        this.addEventListenersToDocument();
+      }
+
+      if (!prevProps.disabled && this.props.disabled) {
+        this.removeEventListenersFromDocument();
+      }
+    }
+  }, {
+    key: "addEventListenersToDocument",
+    value: function addEventListenersToDocument() {
+      document.addEventListener('mousemove', this.onMouseMove);
+      document.addEventListener('mouseup', this.endDrag);
+      document.addEventListener("touchmove", this.onMouseMove);
+      document.addEventListener("touchend", this.endDrag);
+    }
+  }, {
+    key: "removeEventListenersFromDocument",
+    value: function removeEventListenersFromDocument() {
       document.removeEventListener('mousemove', this.onMouseMove);
       document.removeEventListener('mouseup', this.endDrag);
       document.removeEventListener('touchmove', this.onMouseMove);
@@ -178,7 +184,7 @@ function (_React$Component) {
 exports.default = ColumnResizer;
 ColumnResizer.defaultProps = {
   disabled: false,
-  minWidth: 50,
+  minWidth: 0,
   className: ""
 };
 ColumnResizer.propTypes = {

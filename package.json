@@ -1,15 +1,20 @@
 {
-  "name": "react-column-resizer",
-  "version": "1.1.9",
+  "name": "react-table-column-resizer",
+  "version": "1.0.1",
   "description": "Place in between `td` tags to automatically add resizing functionality.",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "build": "babel src -d dist"
   },
+  "module": "dist/column-resizer.jsx",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nik-m2/react-column-resizer.git"
+    "url": "git+https://github.com/bibinantony1998/react-table-column-resizer"
   },
   "keywords": [
     "react",
@@ -19,12 +24,9 @@
     "auto",
     "resize"
   ],
-  "author": "Nik M",
+  "author": "Bibin Antony, Nik M",
   "license": "GPL-3.0-only",
-  "bugs": {
-    "url": "https://github.com/nik-m2/react-column-resizer/issues"
-  },
-  "homepage": "https://github.com/nik-m2/react-column-resizer#readme",
+  "homepage": "https://github.com/bibinantony1998/react-table-column-resizer#readme",
   "peerDependencies": {
     "react": "^16.0.0"
   },

@@ -1,6 +1,6 @@
 
-//Author: Nik M
-//https://github.com/nik-m2/react-column-resizer
+//Author: Bibin Antony, Nik M
+//https://github.com/bibinantony1998/react-table-column-resizer
 
 import React from 'react';
 import { bool, number, string } from 'prop-types';
@@ -18,7 +18,6 @@ export default class ColumnResizer extends React.Component {
         this.mouseX = 0
         this.startPos = 0;
         this.startWidthPrev = 0;
-        this.startWidthNext = 0;
     }
 
     startDrag() {
@@ -29,19 +28,13 @@ export default class ColumnResizer extends React.Component {
         this.dragging = true;
         this.startPos = this.mouseX;
 
-        this.startWidthPrev = 0;
-        this.startWidthNext = 0;        
+        this.startWidthPrev = 0;       
 
         if (this.refs.ele) {
             let prevSibling = this.refs.ele.previousSibling;
-            let nextSibling = this.refs.ele.nextSibling;
 
             if (prevSibling) {
                 this.startWidthPrev = prevSibling.clientWidth;
-            }
-    
-            if (nextSibling) {
-                this.startWidthNext = nextSibling.clientWidth;            
             }
         }
     }
@@ -50,7 +43,6 @@ export default class ColumnResizer extends React.Component {
         if (this.props.disabled) {
             return;
         }
-
         this.dragging = false;
     }
 
@@ -68,27 +60,23 @@ export default class ColumnResizer extends React.Component {
 
         const moveDiff = this.startPos - this.mouseX;
         let newPrev = this.startWidthPrev - moveDiff;
-        let newNext = this.startWidthNext + moveDiff;
 
-        if (newPrev < this.props.minWidth) {
-            const offset = newPrev - this.props.minWidth;
-            newPrev = this.props.minWidth;
-            newNext += offset;
-        } else if (newNext < this.props.minWidth) {
-            const offset = newNext - this.props.minWidth;
-            newNext = this.props.minWidth;
-            newPrev += offset;
+        if(!this.props.minWidth || newPrev >= this.props.minWidth) {
+            ele.previousSibling.style.width = newPrev + 'px';
+            ele.previousSibling.style.minWidth = newPrev + 'px';
+            ele.previousSibling.style.maxWidth = newPrev + 'px';
         }
-
-        ele.previousSibling.style.width = newPrev + 'px';
-        ele.nextSibling.style.width = newNext + 'px';
+        
     }
 
     componentDidMount() {
         if (this.props.disabled) {
             return;
         }
-
+        const ele = this.refs.ele;
+        if(this.props.minWidth && ele) {
+            ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
+        }
         this.addEventListenersToDocument();
     }
 
@@ -146,7 +134,8 @@ export default class ColumnResizer extends React.Component {
                 style={style}
                 className={this.props.className}
                 onMouseDown={!this.props.disabled && this.startDrag}
-                onTouchStart={!this.props.disabled && this.startDrag}/>
+                onTouchStart={!this.props.disabled && this.startDrag}
+            />
         );
     }
 

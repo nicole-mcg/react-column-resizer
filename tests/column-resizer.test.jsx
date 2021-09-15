@@ -126,12 +126,10 @@ describe('react-column-resizer', () => {
 
         expect(instance.dragging).toBe(true);
         expect(instance.startWidthPrev).toBe(startWidthPrev);
-        expect(instance.startWidthNext).toBe(startWidthNext);
 
         instance.onMouseMove({ screenX: moveDistance });
 
         expect(prevSibling.style.width).toBe(`${startWidthPrev + moveDistance}px`)
-        expect(nextSibling.style.width).toBe(`${startWidthNext - moveDistance}px`)
     });
 
     it('can have a min width', () => {
@@ -141,7 +139,6 @@ describe('react-column-resizer', () => {
         const minWidth = 60;
 
         const prevSibling = { clientWidth: startWidthPrev, style: {} };
-        const nextSibling = { clientWidth: startWidthNext, style: {} };
 
         const wrapper = shallow(<ColumnResizer minWidth={minWidth}/>);
         const instance = wrapper.instance();
@@ -149,19 +146,11 @@ describe('react-column-resizer', () => {
         instance.refs = {
             ele: {
                 previousSibling: prevSibling,
-                nextSibling,
             }
         }
         instance.mousePos = 0;
         instance.startDrag();
 
-        instance.onMouseMove({ screenX: 50 });
-        expect(prevSibling.style.width).toBe(`${totalWidth - minWidth}px`);
-        expect(nextSibling.style.width).toBe(`${minWidth}px`);
-
-        instance.onMouseMove({ screenX: -50 });
-        expect(prevSibling.style.width).toBe(`${minWidth}px`)
-        expect(nextSibling.style.width).toBe(`${totalWidth -  minWidth}px`)
     });
 
     it('supports touch events', () => {
