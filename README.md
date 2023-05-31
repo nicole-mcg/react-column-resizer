@@ -5,6 +5,7 @@ Inspired from  React Column Resizer, Fixed width and drag problems
 
 Place in between `td` tags to add resizing functionality. Works with touch and mouse events. 
 
+
 Demo: https://codesandbox.io/s/react-table-column-resizer-3yuqv
 
 ### Usage: 
@@ -48,6 +49,7 @@ render(<App />, document.body);
 | ------------- | ------------- | ------------- | ------------- |
 | disabled | bool | `false` | Set to true if you want to disable resizing |
 | minWidth | number | `0` | The minimum width for the columns (in pixels) |
+| getResizedWidth | function | function(): number | Return the last dragged column width |
 | className | string | `""` | Any custom classes. If set, default `width` and `backgroundColor` styles will not be applied |
 
 
