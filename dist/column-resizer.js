@@ -47,6 +47,8 @@ function (_React$Component) {
     _this.mouseX = 0;
     _this.startPos = 0;
     _this.startWidthPrev = 0;
+    _this.lastDraggedWidth = 0;
+    _this.draggedCol = null;
     return _this;
   }
 
@@ -55,6 +57,12 @@ function (_React$Component) {
     value: function startDrag() {
       if (this.props.disabled) {
         return;
+      }
+
+      this.draggedCol = this.props.id;
+
+      if (this.props.resizeStart && this.draggedCol === this.props.id) {
+        this.props.resizeStart();
       }
 
       this.dragging = true;
@@ -77,6 +85,12 @@ function (_React$Component) {
       }
 
       this.dragging = false;
+
+      if (this.props.resizeEnd && this.draggedCol === this.props.id) {
+        this.props.resizeEnd(this.lastDraggedWidth);
+      }
+
+      this.draggedCol = null;
     }
   }, {
     key: "onMouseMove",
@@ -99,6 +113,7 @@ function (_React$Component) {
         ele.previousSibling.style.width = newPrev + 'px';
         ele.previousSibling.style.minWidth = newPrev + 'px';
         ele.previousSibling.style.maxWidth = newPrev + 'px';
+        this.lastDraggedWidth = newPrev;
       }
     }
   }, {
