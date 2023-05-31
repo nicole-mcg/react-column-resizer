@@ -18,13 +18,17 @@ export default class ColumnResizer extends React.Component {
         this.startPos = 0;
         this.startWidthPrev = 0;
         this.lastDraggedWidth = 0;
+        this.draggedCol = null;
     }
 
     startDrag() {
         if (this.props.disabled) {
             return;
         }
-
+        this.draggedCol = this.props.id;
+        if(this.props.resizeStart && this.draggedCol === this.props.id) {
+            this.props.resizeStart()
+        }
         this.dragging = true;
         this.startPos = this.mouseX;
 
@@ -43,10 +47,11 @@ export default class ColumnResizer extends React.Component {
         if (this.props.disabled) {
             return;
         }
-        this.dragging = false;
-        if(this.props.getResizedWidth) {
-            this.props.getResizedWidth(this.lastDraggedWidth);
+        this.dragging = false;  
+        if(this.props.resizeEnd && this.draggedCol === this.props.id) {
+            this.props.resizeEnd(this.lastDraggedWidth);
         }
+        this.draggedCol = null
     }
 
     onMouseMove(e) {
@@ -68,9 +73,8 @@ export default class ColumnResizer extends React.Component {
             ele.previousSibling.style.width = newPrev + 'px';
             ele.previousSibling.style.minWidth = newPrev + 'px';
             ele.previousSibling.style.maxWidth = newPrev + 'px';
-            this.setState({ lastDraggedWidth: newPrev })
-        }
-        
+            this.lastDraggedWidth = newPrev;
+        }    
     }
 
     componentDidMount() {
