@@ -19,7 +19,6 @@ export default class ColumnResizer extends React.Component {
         this.startWidthPrev = 0;
         this.lastDraggedWidth = 0;
         this.draggedCol = null;
-        this.resizeRef = React.createRef();
     }
 
     startDrag() {
@@ -35,8 +34,8 @@ export default class ColumnResizer extends React.Component {
 
         this.startWidthPrev = 0;       
 
-        if (this.resizeRef) {
-            let prevSibling = resizeRef.previousSibling;
+        if (this.refs.ele) {
+            let prevSibling = this.refs.ele.previousSibling;
 
             if (prevSibling) {
                 this.startWidthPrev = prevSibling.clientWidth;
@@ -65,7 +64,7 @@ export default class ColumnResizer extends React.Component {
             return;
         }
 
-        const ele = this.resizeRef;
+        const ele = this.refs.ele;
 
         const moveDiff = this.startPos - this.mouseX;
         let newPrev = this.startWidthPrev - moveDiff;
@@ -82,7 +81,7 @@ export default class ColumnResizer extends React.Component {
         if (this.props.disabled) {
             return;
         }
-        const ele = this.resizeRef;
+        const ele = this.refs.ele;
         if(this.props.minWidth && ele) {
             ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
         }
@@ -139,7 +138,7 @@ export default class ColumnResizer extends React.Component {
         }
 
         return (
-            <th ref={this.resizeRef} 
+            <th ref="ele" 
                 style={style}
                 className={`${this.props.disabled ? "disabled_column_resize" : ""} ${this.props.className}`}
                 onMouseDown={!this.props.disabled && this.startDrag}
