@@ -5,6 +5,10 @@ Inspired from  React Column Resizer, Fixed width and drag problems
 
 Place in between `td` tags to add resizing functionality. Works with touch and mouse events. 
 
+Note: Don't add any min-width through css for table columns other than resize component
+
+For react version 16 use version 1.0.2
+
 
 Demo: https://codesandbox.io/s/react-table-column-resizer-3yuqv
 

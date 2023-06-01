@@ -49,6 +49,7 @@ function (_React$Component) {
     _this.startWidthPrev = 0;
     _this.lastDraggedWidth = 0;
     _this.draggedCol = null;
+    _this.resizeRef = _react.default.createRef();
     return _this;
   }
 
@@ -69,8 +70,8 @@ function (_React$Component) {
       this.startPos = this.mouseX;
       this.startWidthPrev = 0;
 
-      if (this.refs.ele) {
-        var prevSibling = this.refs.ele.previousSibling;
+      if (this.resizeRef) {
+        var prevSibling = resizeRef.previousSibling;
 
         if (prevSibling) {
           this.startWidthPrev = prevSibling.clientWidth;
@@ -105,7 +106,7 @@ function (_React$Component) {
         return;
       }
 
-      var ele = this.refs.ele;
+      var ele = this.resizeRef;
       var moveDiff = this.startPos - this.mouseX;
       var newPrev = this.startWidthPrev - moveDiff;
 
@@ -123,7 +124,7 @@ function (_React$Component) {
         return;
       }
 
-      var ele = this.refs.ele;
+      var ele = this.resizeRef;
 
       if (this.props.minWidth && ele) {
         ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
@@ -183,10 +184,10 @@ function (_React$Component) {
         style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
       }
 
-      return _react.default.createElement("td", {
-        ref: "ele",
+      return _react.default.createElement("th", {
+        ref: this.resizeRef,
         style: style,
-        className: this.props.className,
+        className: "".concat(this.props.disabled ? "disabled_column_resize" : "", " ").concat(this.props.className),
         onMouseDown: !this.props.disabled && this.startDrag,
         onTouchStart: !this.props.disabled && this.startDrag
       });
