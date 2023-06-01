@@ -120,16 +120,15 @@ function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
+      if (this.props.minWidth && ele) {
+        ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
+      }
+
       if (this.props.disabled) {
         return;
       }
 
       var ele = this.resizeRef.current;
-
-      if (this.props.minWidth && ele) {
-        ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
-      }
-
       this.addEventListenersToDocument();
     }
   }, {
