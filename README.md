@@ -54,7 +54,7 @@ render(<App />, document.body);
 | id (mandatory) | number |  | Uniq id for each column resize  |
 | disabled | bool | `false` | Set to true if you want to disable resizing |
 | minWidth (optional) | number | `undefined` | The minimum width for the columns (in pixels) |
-| maxWidth (optional) | number | `undefined` | The maximum width for the columns (in pixels) |
+| maxWidth (optional) | number | null | `undefined` | The maximum width for the columns (in pixels) |
 | resizeStart (optional) | function | function(): void | Trigger when resize start |
 | resizeEnd (optional) | function | function(): number | Trigger when resize end and return the last dragged column width |
 | className | string | `""` | Any custom classes. If set, default `width` and `backgroundColor` styles will not be applied |

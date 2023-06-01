@@ -1,6 +1,6 @@
 {
   "name": "react-table-column-resizer",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Place in between `td` tags to automatically add resizing functionality.",
   "main": "index.js",
   "types": "./dist/column-resizer.d.ts",

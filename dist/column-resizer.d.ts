@@ -5,7 +5,7 @@ declare module "react-table-column-resizer" {
 
 	export interface Props {
         minWidth: number;
-        maxWidth: number;
+        maxWidth: number | null;
         id: number;
         resizeStart(): void;
         resizeEnd(width: number): void;

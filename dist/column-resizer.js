@@ -70,8 +70,8 @@ function (_React$Component) {
       this.startPos = this.mouseX;
       this.startWidthPrev = 0;
 
-      if (this.resizeRef) {
-        var prevSibling = resizeRef.previousSibling;
+      if (this.resizeRef.current) {
+        var prevSibling = this.resizeRef.current.previousSibling;
 
         if (prevSibling) {
           this.startWidthPrev = prevSibling.clientWidth;
@@ -106,11 +106,11 @@ function (_React$Component) {
         return;
       }
 
-      var ele = this.resizeRef;
+      var ele = this.resizeRef.current;
       var moveDiff = this.startPos - this.mouseX;
       var newPrev = this.startWidthPrev - moveDiff;
 
-      if (!this.props.minWidth || newPrev >= this.props.minWidth) {
+      if ((!this.props.minWidth || newPrev >= this.props.minWidth) && (!this.props.maxWidth || newPrev <= this.props.maxWidth)) {
         ele.previousSibling.style.width = newPrev + 'px';
         ele.previousSibling.style.minWidth = newPrev + 'px';
         ele.previousSibling.style.maxWidth = newPrev + 'px';
@@ -124,7 +124,7 @@ function (_React$Component) {
         return;
       }
 
-      var ele = this.resizeRef;
+      var ele = this.resizeRef.current;
 
       if (this.props.minWidth && ele) {
         ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
