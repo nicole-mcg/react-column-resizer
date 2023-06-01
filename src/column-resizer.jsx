@@ -70,7 +70,7 @@ export default class ColumnResizer extends React.Component {
         const moveDiff = this.startPos - this.mouseX;
         let newPrev = this.startWidthPrev - moveDiff;
 
-        if(!this.props.minWidth || newPrev >= this.props.minWidth || newPrev >= this.props.minWidth) {
+        if((!this.props.minWidth || newPrev >= this.props.minWidth) && (!this.props.maxWidth || newPrev <= this.props.maxWidth)) {
             ele.previousSibling.style.width = newPrev + 'px';
             ele.previousSibling.style.minWidth = newPrev + 'px';
             ele.previousSibling.style.maxWidth = newPrev + 'px';
