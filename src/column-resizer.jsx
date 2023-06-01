@@ -79,14 +79,13 @@ export default class ColumnResizer extends React.Component {
     }
 
     componentDidMount() {
+        const ele = this.resizeRef.current;
         if(this.props.minWidth && ele) {
             ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
         }
         if (this.props.disabled) {
             return;
-        }
-        const ele = this.resizeRef.current;
-       
+        }  
         this.addEventListenersToDocument();
     }
 
@@ -142,9 +141,10 @@ export default class ColumnResizer extends React.Component {
         return (
             <th ref={this.resizeRef} 
                 style={style}
+                disabled={this.props.disabled}
                 className={`${this.props.disabled ? "disabled_column_resize" : ""} ${this.props.className}`}
-                onMouseDown={!this.props.disabled && this.startDrag}
-                onTouchStart={!this.props.disabled && this.startDrag}
+                onMouseDown={!this.props.disabled ? this.startDrag : null}
+                onTouchStart={!this.props.disabled ? this.startDrag : null}
             />
         );
     }
