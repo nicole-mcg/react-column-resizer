@@ -120,6 +120,8 @@ function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
+      var ele = this.resizeRef.current;
+
       if (this.props.minWidth && ele) {
         ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
       }
@@ -128,7 +130,6 @@ function (_React$Component) {
         return;
       }
 
-      var ele = this.resizeRef.current;
       this.addEventListenersToDocument();
     }
   }, {
@@ -186,9 +187,10 @@ function (_React$Component) {
       return _react.default.createElement("th", {
         ref: this.resizeRef,
         style: style,
+        disabled: this.props.disabled,
         className: "".concat(this.props.disabled ? "disabled_column_resize" : "", " ").concat(this.props.className),
-        onMouseDown: !this.props.disabled && this.startDrag,
-        onTouchStart: !this.props.disabled && this.startDrag
+        onMouseDown: !this.props.disabled ? this.startDrag : null,
+        onTouchStart: !this.props.disabled ? this.startDrag : null
       });
     }
   }]);

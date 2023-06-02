@@ -84,6 +84,13 @@ export default class ColumnResizer extends React.Component {
             ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
         }
         if (this.props.disabled) {
+            if(this.props.minWidth && ele) {
+                ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
+                ele.previousSibling.style.width = this.props.minWidth + 'px';
+            }
+            if(this.props.maxWidth && ele) {
+                ele.previousSibling.style.maxWidth = this.props.maxWidth + 'px';
+            }
             return;
         }  
         this.addEventListenersToDocument();
