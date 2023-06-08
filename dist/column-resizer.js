@@ -9,6 +9,8 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = require("prop-types");
 
+require("./column-resizer.css");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -114,6 +116,7 @@ function (_React$Component) {
         ele.previousSibling.style.width = newPrev + 'px';
         ele.previousSibling.style.minWidth = newPrev + 'px';
         ele.previousSibling.style.maxWidth = newPrev + 'px';
+        ele.previousSibling.style.setProperty('--column_resize_before_width', newPrev + 'px');
         this.lastDraggedWidth = newPrev;
       }
     }
@@ -122,14 +125,16 @@ function (_React$Component) {
     value: function componentDidMount() {
       var ele = this.resizeRef.current;
 
-      if (this.props.defaultWidth && ele) {
-        ele.previousSibling.style.minWidth = this.props.defaultWidth + 'px';
+      if (this.props.minWidth && ele) {
+        ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
+        ele.previousSibling.style.setProperty('--column_resize_before_width', this.props.minWidth + 'px');
       }
 
       if (this.props.disabled) {
-        if (this.props.defaultWidth && ele) {
-          ele.previousSibling.style.defaultWidth = this.props.defaultWidth + 'px';
-          ele.previousSibling.style.width = this.props.defaultWidth + 'px';
+        if (this.props.minWidth && ele) {
+          ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
+          ele.previousSibling.style.width = this.props.minWidth + 'px';
+          ele.previousSibling.style.setProperty('--column_resize_before_width', this.props.minWidth + 'px');
         }
 
         if (this.props.maxWidth && ele) {
@@ -197,7 +202,7 @@ function (_React$Component) {
         ref: this.resizeRef,
         style: style,
         disabled: this.props.disabled,
-        className: "".concat(this.props.disabled ? "disabled_column_resize" : "", " ").concat(this.props.className),
+        className: "column_resizer_own_class ".concat(this.props.disabled ? "disabled_column_resize" : "", " ").concat(this.props.className),
         onMouseDown: !this.props.disabled ? this.startDrag : null,
         onTouchStart: !this.props.disabled ? this.startDrag : null
       });
