@@ -3,7 +3,7 @@ A simple column resizer component for Html 5 Table
 
 Inspired from  React Column Resizer, Fixed width and drag problems
 
-Place in between `td` tags to add resizing functionality. Works with touch and mouse events. 
+Place in between `td` tags to add resizing functionality and add "column_resize_table" to the table. Works with touch and mouse events. 
 
 Note: Don't add any min-width through css for table columns other than resize component
 
@@ -16,6 +16,8 @@ Demo: https://codesandbox.io/s/react-table-column-resizer-3yuqv
 
 `npm install react-table-column-resizer`
 
+Add "column_resize_table" class to the table
+
 <sup>* Requires `react` as a peer dependency: `npm install react`</sup>
 
 
@@ -26,7 +28,7 @@ import ColumnResizer from "react-table-column-resizer";
 
 const App = () => (
   <div>
-    <table>
+    <table class="column_resize_table">
       <tbody>
         <tr>
           <td>1</td>

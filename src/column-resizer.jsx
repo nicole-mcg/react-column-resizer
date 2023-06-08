@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { bool, number, string } from 'prop-types';
+import "./column-resizer.css";
 
 export default class ColumnResizer extends React.Component {
 
@@ -74,19 +75,22 @@ export default class ColumnResizer extends React.Component {
             ele.previousSibling.style.width = newPrev + 'px';
             ele.previousSibling.style.minWidth = newPrev + 'px';
             ele.previousSibling.style.maxWidth = newPrev + 'px';
+            ele.previousSibling.style.setProperty('--column_resize_before_width', newPrev + 'px');
             this.lastDraggedWidth = newPrev;
         }    
     }
 
     componentDidMount() {
         const ele = this.resizeRef.current;
-        if(this.props.defaultWidth && ele) {
-            ele.previousSibling.style.minWidth = this.props.defaultWidth + 'px';
+        if(this.props.minWidth && ele) {
+            ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
+            ele.previousSibling.style.setProperty('--column_resize_before_width', this.props.minWidth + 'px');
         }
         if (this.props.disabled) {
-            if(this.props.defaultWidth && ele) {
-                ele.previousSibling.style.defaultWidth = this.props.defaultWidth + 'px';
-                ele.previousSibling.style.width = this.props.defaultWidth + 'px';
+            if(this.props.minWidth && ele) {
+                ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
+                ele.previousSibling.style.width = this.props.minWidth + 'px';
+                ele.previousSibling.style.setProperty('--column_resize_before_width', this.props.minWidth + 'px');       
             }
             if(this.props.maxWidth && ele) {
                 ele.previousSibling.style.maxWidth = this.props.maxWidth + 'px';
@@ -131,25 +135,21 @@ export default class ColumnResizer extends React.Component {
     }
 
     render() {
-
         var style = {
             userSelect: "none"
         };
-
         if (!this.props.disabled) {
             style.cursor = 'ew-resize';
         }
-
         if (this.props.className === "") {
             style.width = '6px';
             style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
         }
-
         return (
             <th ref={this.resizeRef} 
                 style={style}
                 disabled={this.props.disabled}
-                className={`${this.props.disabled ? "disabled_column_resize" : ""} ${this.props.className}`}
+                className={`column_resizer_own_class ${this.props.disabled ? "disabled_column_resize" : ""} ${this.props.className}`}
                 onMouseDown={!this.props.disabled ? this.startDrag : null}
                 onTouchStart={!this.props.disabled ? this.startDrag : null}
             />
