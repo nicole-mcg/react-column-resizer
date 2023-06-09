@@ -16,7 +16,15 @@ Demo: https://codesandbox.io/s/react-table-column-resizer-3yuqv
 
 `npm install react-table-column-resizer`
 
-Add "column_resize_table" class to the table
+Add 
+`column_resize_table`
+class to the table
+
+Add css 
+
+`.column_resize_table th::before {content: ''; display: block; width: var(--column_resize_before_width);}`
+
+to css files
 
 <sup>* Requires `react` as a peer dependency: `npm install react`</sup>
 
