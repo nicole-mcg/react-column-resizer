@@ -3,7 +3,6 @@
 
 import React from 'react';
 import { bool, number, string } from 'prop-types';
-import "./column-resizer.css";
 
 export default class ColumnResizer extends React.Component {
 
@@ -146,6 +145,16 @@ export default class ColumnResizer extends React.Component {
             style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
         }
         return (
+            <>
+            <style>
+                {`
+                    .column_resize_table th::before {
+                        content: '';
+                        display: block; 
+                        width: var(--column_resize_before_width);
+                    }
+                `}    
+            </style>
             <th ref={this.resizeRef} 
                 style={style}
                 disabled={this.props.disabled}
@@ -153,6 +162,8 @@ export default class ColumnResizer extends React.Component {
                 onMouseDown={!this.props.disabled ? this.startDrag : null}
                 onTouchStart={!this.props.disabled ? this.startDrag : null}
             />
+            </>
+           
         );
     }
 

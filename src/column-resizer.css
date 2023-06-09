@@ -1,5 +1,0 @@
-.column_resize_table th::before {
-    content: '';
-    display: block; 
-    width: var(--column_resize_before_width);
-}
