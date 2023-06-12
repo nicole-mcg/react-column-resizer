@@ -123,15 +123,25 @@ function (_React$Component) {
     value: function componentDidMount() {
       var ele = this.resizeRef.current;
 
-      if (this.props.defaultWidth && ele) {
-        ele.previousSibling.style.minWidth = this.props.defaultWidth + 'px';
-        ele.previousSibling.style.setProperty('--column_resize_before_width', this.props.defaultWidth + 'px');
+      if (ele) {
+        if (this.props.defaultWidth) {
+          ele.previousSibling.style.minWidth = this.props.defaultWidth + 'px';
+          ele.previousSibling.style.width = this.props.defaultWidth + 'px';
+          ele.previousSibling.style.maxWidth = this.props.defaultWidth + 'px';
+          ele.previousSibling.style.setProperty('--column_resize_before_width', this.props.defaultWidth + 'px');
+        } else if (this.props.minWidth) {
+          ele.previousSibling.style.minWidth = this.props.minWidth + 'px';
+          ele.previousSibling.style.width = this.props.minWidth + 'px';
+          ele.previousSibling.style.maxWidth = this.props.minWidth + 'px';
+          ele.previousSibling.style.setProperty('--column_resize_before_width', this.props.minWidth + 'px');
+        }
       }
 
       if (this.props.disabled) {
         if (this.props.defaultWidth && ele) {
           ele.previousSibling.style.minWidth = this.props.defaultWidth + 'px';
           ele.previousSibling.style.width = this.props.defaultWidth + 'px';
+          ele.previousSibling.style.maxWidth = this.props.defaultWidth + 'px';
           ele.previousSibling.style.setProperty('--column_resize_before_width', this.props.defaultWidth + 'px');
         }
 
